@@ -287,13 +287,13 @@ export const SearchPanel = forwardRef<HTMLInputElement, SearchProps>(function Se
                     role="checkbox"
                     aria-checked={picked}
                     aria-label={picked ? `Remove ${row.hit.title} from selection` : `Select ${row.hit.title} to chat about together`}
-                    title="Select for a chat across several notes (⇧Enter)"
+                    title="Select to chat about several notes together (⇧Enter)"
                     onClick={(e) => {
                       e.stopPropagation()
                       p.onTogglePick(row.hit)
                     }}
                   >
-                    {picked && <I.Check size={13} strokeWidth={3.2} />}
+                    {picked && <I.Check size={11} strokeWidth={3.4} />}
                   </button>
                 </div>
               )
@@ -353,13 +353,14 @@ export const SearchPanel = forwardRef<HTMLInputElement, SearchProps>(function Se
         <div className="lib-tray" role="status">
           <span className="lib-grow">
             {p.picks.size} note{p.picks.size === 1 ? '' : 's'} selected
+            <span className="lib-tray-hint">{p.picks.size === 1 ? 'Select more to discuss them in one chat' : 'One chat reads them all together'}</span>
           </span>
           <button type="button" className="lib-btn lib-btn-quiet lib-btn-sm" onClick={p.onClearPicks}>
             Clear
           </button>
           <button type="button" className="lib-btn lib-btn-primary lib-btn-sm" onClick={p.onChatPicks}>
             <I.ChatPlus size={14} />
-            Chat about {p.picks.size === 1 ? 'it' : 'them'}
+            {p.picks.size === 1 ? 'Chat about it' : `Chat about all ${p.picks.size}`}
           </button>
         </div>
       )}

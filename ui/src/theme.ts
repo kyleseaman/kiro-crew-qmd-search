@@ -358,9 +358,9 @@ export const LIBRARY_CSS = `
   position: absolute;
   right: 10px;
   top: 10px;
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
   border: 1.5px solid var(--border-strong);
   background: var(--raised);
   color: var(--accent-on);
@@ -373,8 +373,10 @@ export const LIBRARY_CSS = `
 }
 .lib-hit:hover .lib-check, .lib-check:focus-visible, .lib-results[data-picking="true"] .lib-check { opacity: 1; }
 .lib-check:focus-visible { outline-offset: 1px; }
+.lib-hit[aria-selected="true"] .lib-check:not([aria-checked="true"]) { opacity: .55; }
 .lib-check[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); opacity: 1; }
-.lib-hit:has(.lib-check) .lib-hit-title { padding-right: 26px; }
+.lib-hit:has(.lib-check) .lib-hit-title { padding-right: 20px; }
+.lib-tray-hint { display: block; font-weight: 500; font-size: 11.5px; opacity: .7; }
 
 .lib-deep-row {
   display: flex;
