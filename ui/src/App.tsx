@@ -466,53 +466,30 @@ function Welcome(p: {
   }
   return (
     <div className="lib-scroll">
-      <div className="lib-welcome">
-        <h2>{greeting}. What are you looking for?</h2>
+      <div className="lib-welcome lib-welcome-quiet">
+        <div className="lib-meta-sm">{greeting}</div>
+        <h2>Search your notes</h2>
         <p>
-          Type anything into search and matching passages appear as you go. Open a note to read it, then chat about it, or select several results and talk about them together.
+          Matching passages appear as you type. Open a note to read it, then chat about it, or select a few results and talk about them together.
         </p>
-        {p.status && !p.status.error && (
-          <div className="lib-stats">
-            <div className="lib-stat">
-              <b>{p.status.documents.toLocaleString()}</b>
-              <span>notes indexed</span>
-            </div>
-            <div className="lib-stat">
-              <b>{p.status.collections.length}</b>
-              <span>collection{p.status.collections.length === 1 ? '' : 's'}</span>
-            </div>
-            <div className="lib-stat">
-              <b>{p.sessions.length}</b>
-              <span>note chats</span>
-            </div>
-          </div>
-        )}
-        <div className="lib-keys" aria-label="Keyboard shortcuts">
-          <span><span className="lib-kbd">/</span><span className="lib-kbd">{MOD}K</span></span>
-          <span>Search</span>
-          <span><span className="lib-kbd">↑</span><span className="lib-kbd">↓</span></span>
-          <span>Preview results in the reader</span>
-          <span><span className="lib-kbd">↵</span></span>
-          <span>Open the highlighted note</span>
-          <span><span className="lib-kbd">{MOD}↵</span></span>
-          <span>Search by meaning (hybrid QMD query)</span>
-          <span><span className="lib-kbd">⇧↵</span></span>
-          <span>Select a result to chat about several notes</span>
-          <span><span className="lib-kbd">{MOD}J</span></span>
-          <span>Show or hide chats</span>
-        </div>
-        <div className="lib-row" style={{ gap: 8, marginTop: 8 }}>
+        <div className="lib-row" style={{ gap: 8 }}>
           <button type="button" className="lib-btn lib-btn-primary" onClick={p.onSearch}>
             <I.Search size={15} /> Start searching
           </button>
           {p.recent[0] && (
-            <button type="button" className="lib-btn lib-btn-secondary" onClick={() => p.onOpen(p.recent[0])}>
-              <I.Clock size={15} /> Open “{p.recent[0].title.slice(0, 40)}”
+            <button type="button" className="lib-btn lib-btn-secondary lib-ell" style={{ maxWidth: 320 }} onClick={() => p.onOpen(p.recent[0])}>
+              <I.Clock size={15} /> <span className="lib-ell">Continue “{p.recent[0].title}”</span>
             </button>
           )}
         </div>
+        <div className="lib-keyline" aria-label="Keyboard shortcuts">
+          <span><span className="lib-kbd">/</span> search</span>
+          <span><span className="lib-kbd">{MOD}↵</span> search by meaning</span>
+          <span><span className="lib-kbd">⇧↵</span> select several</span>
+          <span><span className="lib-kbd">{MOD}J</span> chats</span>
+        </div>
         {p.sessions.length > 0 && (
-          <div style={{ marginTop: 18 }}>
+          <div style={{ marginTop: 12 }}>
             <div className="lib-section" style={{ paddingLeft: 0 }}>Recent chats</div>
             {p.sessions.slice(0, 5).map((s) => (
               <button key={s.slot_key} type="button" className="lib-convo" onClick={() => p.onResume(s)}>
