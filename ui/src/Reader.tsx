@@ -40,17 +40,18 @@ export function TabStrip(props: {
 }) {
   return (
     <div className="lib-tabs" role="tablist" aria-label="Open notes">
-      <button
-        type="button"
-        className="lib-btn lib-btn-quiet lib-btn-icon"
-        style={{ marginBottom: 6, flex: 'none' }}
-        aria-pressed={props.leftOpen}
-        aria-label={props.leftOpen ? 'Hide search' : 'Show search'}
-        title={`${props.leftOpen ? 'Hide' : 'Show'} search (${MOD}\\)`}
-        onClick={props.onToggleLeft}
-      >
-        <I.PanelLeft size={16} />
-      </button>
+      {/* With the search panel open its own header holds the toggle. */}
+      {!props.leftOpen && (
+        <button
+          type="button"
+          className="lib-btn lib-btn-quiet lib-btn-icon lib-panel-toggle"
+          aria-label="Show search"
+          title={`Show search (${MOD}\\)`}
+          onClick={props.onToggleLeft}
+        >
+          <I.PanelLeft size={16} />
+        </button>
+      )}
       {props.tabs.map((t) => {
         const key = docKey(t)
         return (

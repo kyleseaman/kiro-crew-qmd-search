@@ -39,6 +39,7 @@ export interface SearchProps {
   indexInfo: { documents: number; updated: string | null; error?: string } | null
   sort: SortMode
   onSort: (s: SortMode) => void
+  onCollapse: () => void
 }
 
 interface Row {
@@ -140,6 +141,16 @@ export const SearchPanel = forwardRef<HTMLInputElement, SearchProps>(function Se
             {p.indexInfo.updated ? `indexed ${relTime(p.indexInfo.updated)}` : ''}
           </span>
         )}
+        <button
+          type="button"
+          className="lib-btn lib-btn-quiet lib-btn-icon lib-panel-toggle"
+          style={p.indexInfo ? undefined : { marginLeft: 'auto' }}
+          aria-label="Hide search"
+          title={`Hide search (${MOD}\\)`}
+          onClick={p.onCollapse}
+        >
+          <I.PanelLeft size={16} />
+        </button>
       </div>
 
       <div className="lib-search" role="search">

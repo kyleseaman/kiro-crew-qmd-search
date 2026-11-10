@@ -443,8 +443,9 @@ export const LIBRARY_CSS = `
 .lib-btn-quiet { color: var(--muted); padding: 6px 9px; }
 .lib-btn-quiet:hover:not(:disabled) { background: var(--hover); color: var(--text); }
 .lib-btn-quiet[aria-pressed="true"] { color: var(--accent-text); background: var(--hover); }
-.lib-tabs > .lib-btn-icon[aria-pressed] { background: transparent; color: var(--muted); }
-.lib-tabs > .lib-btn-icon[aria-pressed]:hover { background: var(--hover); color: var(--text); }
+.lib-panel-toggle { color: var(--muted); flex: none; }
+.lib-panel-toggle:hover { color: var(--text); }
+.lib-brand .lib-panel-toggle { margin-right: -6px; }
 .lib-btn-sm { padding: 4px 10px; font-size: 12px; }
 .lib-btn-icon { padding: 7px; border-radius: 999px; }
 .lib-tray .lib-btn-primary { background: var(--accent); color: var(--accent-fg); }
@@ -521,48 +522,51 @@ export const LIBRARY_CSS = `
 .lib-frame[data-left="closed"] .lib-center > .lib-scroll { margin-left: 10px; }
 .lib-tabs {
   display: flex;
-  align-items: flex-end;
-  gap: 2px;
-  padding: 10px 10px 0;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px 8px 0;
   background: var(--bg);
   overflow-x: auto;
   scrollbar-width: none;
-  min-height: 48px;
+  min-height: 50px;
   flex: none;
 }
+.lib-frame[data-left="closed"] .lib-tabs { padding-left: 10px; }
 .lib-tabs::-webkit-scrollbar { display: none; }
 .lib-tab {
   display: flex;
   align-items: center;
-  gap: 7px;
-  max-width: 240px;
+  gap: 6px;
+  max-width: 220px;
   min-width: 0;
-  padding: 8px 8px 9px 13px;
-  border-radius: 12px 12px 0 0;
+  height: 30px;
+  padding: 0 4px 0 10px;
+  border-radius: 8px;
   border: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 550;
   cursor: pointer;
   position: relative;
   flex: none;
 }
+.lib-tab > svg { flex: none; opacity: .7; }
 .lib-tab:hover { background: var(--hover); color: var(--text); }
-.lib-tab[aria-selected="true"] { background: var(--raised); color: var(--text); box-shadow: 0 -1px 0 var(--divider-soft), 1px 0 0 var(--divider-soft), -1px 0 0 var(--divider-soft); }
-.lib-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--raised); }
+.lib-tab[aria-selected="true"] { background: var(--card); color: var(--text); box-shadow: var(--shadow-sm); }
 .lib-tab[data-preview="true"] > .lib-ell { font-style: italic; }
 .lib-tab-x {
   display: grid;
   place-items: center;
   width: 20px;
   height: 20px;
-  border-radius: 6px;
-  opacity: .55;
+  border-radius: 5px;
+  opacity: 0;
   flex: none;
 }
-.lib-tab-x:hover { background: var(--press); opacity: 1; }
-.lib-tabs-end { margin-left: auto; display: flex; gap: 2px; align-items: center; padding: 0 4px 6px 0; flex: none; }
+.lib-tab:hover .lib-tab-x, .lib-tab[aria-selected="true"] .lib-tab-x, .lib-tab:focus-visible .lib-tab-x { opacity: .55; }
+.lib-tab-x:hover { background: var(--press); opacity: 1 !important; }
+.lib-tabs-end { margin-left: auto; display: flex; gap: 2px; align-items: center; padding-right: 4px; flex: none; }
 
 .lib-scroll {
   flex: 1;
