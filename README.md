@@ -1,8 +1,8 @@
 # Notes Search for Kiro Crew
 
-Search, read and chat about your markdown notes inside [Kiro Crew](https://kiro.dev). Notes Search indexes your notes with [QMD](https://github.com/tobi/qmd) on your own computer. It works with Obsidian vaults, Reflect graphs and any folder of `.md` files.
+Notes Search is an app for [Kiro Crew](https://kiro.dev). It adds a page to the Crew dashboard where you can search, read and chat about your markdown notes. It works with Obsidian vaults, Reflect graphs and any folder of `.md` files.
 
-![Notes Search icon](assets/icon.svg)
+Search runs on your computer through [QMD](https://github.com/tobi/qmd), an open-source search engine for markdown. QMD keeps a SQLite index of your folders. It offers keyword search, plus search by meaning using small models it downloads and runs locally. Notes Search reads that index, shows your notes, and passes the ones you pick to your Crew agent when you want to talk about them.
 
 ## What it does
 
@@ -11,7 +11,7 @@ Search, read and chat about your markdown notes inside [Kiro Crew](https://kiro.
 - **Obsidian support.** Notes Search detects a vault from its `.obsidian/` folder. It then resolves links by filename and `aliases`, renders callouts, `==highlights==`, `%%comments%%`, `![[embeds]]` (whole notes, headings and `^blocks`) and sized images, and offers an **Open in Obsidian** button.
 - **Chat about your notes.** Start a chat about one note, add more notes to a running chat, or select several results and talk about them together. Each chat is a regular Crew session in your sidebar.
 - **Manage folders in the app.** Add, re-index or remove folders from the **Folders** screen. Notes Search also suggests Obsidian vaults it finds on your computer.
-- **Private notes stay private.** A note with `private: true` in its frontmatter is never sent to a chat.
+- **Private notes are kept out of chats.** Notes Search won't start a chat about a note with `private: true` in its frontmatter. The bundled skill also tells the agent not to read, quote or summarise one it finds by searching.
 - **Two agent skills.** `notes-search` teaches the agent to answer from your notes with QMD and to respect private notes and each app's link rules. `notes-search-setup` covers installing QMD, adding folders and fixing a broken index.
 
 Notes Search uses your Crew theme and follows your light or dark mode.
@@ -62,9 +62,18 @@ Set these in the gateway's environment, then restart the gateway:
 
 ## How it works
 
-The backend runs in the Kiro Crew gateway, behind the dashboard's own sign-in. It opens QMD's SQLite index **read-only** for instant search and reading, and runs the `qmd` CLI only for search by meaning and for the folder changes you ask for. Folder jobs run one at a time, because they all write the same index. Notes are read from disk, so the reader shows your latest edits even before QMD re-indexes.
+```
+your folders ──qmd──▶ QMD index (SQLite, on disk)
+                           │ read-only
+                           ▼
+            Notes Search page + backend ──▶ Crew chat ──▶ your agent
+            (in the Crew dashboard)         (note titles   (reads the files
+                                             and paths)     it was given)
+```
 
-When you start a chat, Notes Search sends the agent the titles and file paths of the notes you picked, never their contents. The agent reads the files itself, and the skills tell it to skip private notes.
+The backend runs inside the Kiro Crew gateway, behind the dashboard's sign-in. It opens QMD's index **read-only** for instant keyword search and reading. It runs the `qmd` CLI for search by meaning and for the folder changes you make on the Folders screen. Folder jobs run one at a time, because they all write the same index. The reader loads notes straight from disk, so it shows your latest edits before QMD re-indexes.
+
+Searching and reading stay on your computer. Chatting works differently. The first message names the notes you picked by title and path, and the agent then reads those files with its own tools. From that point the notes are part of the conversation, and they go to your model provider like anything else you discuss with Crew.
 
 ## Development
 
