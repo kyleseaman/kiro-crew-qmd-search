@@ -141,7 +141,7 @@ export const LIBRARY_CSS = `
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 18px 20px 10px;
+  padding: 16px 16px 12px;
 }
 .lib-logo {
   width: 26px;
@@ -164,22 +164,22 @@ export const LIBRARY_CSS = `
 .lib-brand .lib-meta { margin-left: auto; text-align: right; line-height: 1.3; }
 
 .lib-search {
-  margin: 4px 16px 10px;
+  margin: 2px 16px 10px;
   position: relative;
 }
 .lib-search-box {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 48px;
-  padding: 0 8px 0 16px;
-  border-radius: 999px;
-  background: var(--raised);
-  box-shadow: var(--shadow-sm);
-  border: 1.5px solid transparent;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 6px 0 11px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
   transition: border-color .15s, box-shadow .15s;
 }
-.lib-search-box:focus-within { border-color: var(--accent-text); box-shadow: var(--shadow-md); }
+.lib-search-box:hover { border-color: var(--border-hover); }
+.lib-search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
 .lib-search-box svg { color: var(--muted); flex: none; }
 .lib-search-box input {
   flex: 1;
@@ -189,9 +189,9 @@ export const LIBRARY_CSS = `
   color: var(--text);
   caret-color: var(--accent-text);
   font: inherit;
-  font-size: 15.5px;
-  font-weight: 500;
-  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 8px 0;
 }
 .lib-search-box input::placeholder { color: var(--muted); font-weight: 400; }
 .lib-search-box input:focus-visible { outline: none; }
@@ -216,7 +216,7 @@ export const LIBRARY_CSS = `
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
-  padding: 0 18px 8px;
+  padding: 0 16px 8px;
 }
 .lib-chip {
   display: inline-flex;
@@ -562,7 +562,7 @@ export const LIBRARY_CSS = `
   flex: none;
 }
 .lib-tab-x:hover { background: var(--press); opacity: 1; }
-.lib-tabs-end { margin-left: auto; display: flex; gap: 2px; align-items: center; padding-bottom: 6px; flex: none; }
+.lib-tabs-end { margin-left: auto; display: flex; gap: 2px; align-items: center; padding: 0 4px 6px 0; flex: none; }
 
 .lib-scroll {
   flex: 1;
@@ -917,11 +917,23 @@ export const LIBRARY_CSS = `
 .lib-btn-danger { background: var(--danger); color: var(--danger-fg); }
 .lib-btn-danger:hover:not(:disabled) { filter: brightness(1.08); }
 .lib-welcome-folders { margin-top: 4px; }
-.lib-welcome-quiet { gap: 14px; padding-top: 16vh; max-width: 560px; }
-.lib-welcome-quiet h2 { font-size: 26px; letter-spacing: -0.01em; margin-top: -6px; }
-.lib-welcome-quiet p { font-size: 14.5px; }
-.lib-keyline { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.lib-empty-reader {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--muted);
+}
+.lib-empty-reader > svg { color: var(--faint); margin-bottom: 4px; }
+.lib-empty-reader b { color: var(--text); font-size: 15px; font-weight: 650; }
+.lib-empty-reader p { margin: 0; font-size: 13.5px; max-width: 340px; line-height: 1.55; }
+.lib-keyline { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; font-size: 12px; color: var(--muted); margin-top: 10px; }
 .lib-keyline .lib-kbd { margin-right: 4px; }
+.lib-empty-chats { margin-top: 18px; width: min(360px, 100%); text-align: left; }
 .lib-folders-foot { line-height: 1.6; }
 
 .lib-skeleton { display: flex; flex-direction: column; gap: 12px; }
