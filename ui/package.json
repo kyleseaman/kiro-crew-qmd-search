@@ -1,0 +1,22 @@
+{
+  "name": "notes-search-ui",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "comment": "React, ReactDOM, lucide-react and @kirocrew/app-sdk are supplied by the dashboard host through its import map, so they are Rollup externals rather than dependencies: a second React would break every hook. marked and DOMPurify are bundled: the host's MarkdownRenderer cannot resolve [[wikilinks]], rewrite embedded images or give headings stable ids for the outline, and every note passes through DOMPurify because clipped web pages in the vault carry raw HTML into a page that runs with the dashboard's credentials.",
+  "dependencies": {
+    "dompurify": "3.4.16",
+    "marked": "18.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
+    "@vitejs/plugin-react": "5.0.4",
+    "typescript": "5.9.3",
+    "vite": "7.1.12"
+  }
+}

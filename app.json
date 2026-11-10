@@ -1,0 +1,82 @@
+{
+  "name": "notes-search",
+  "version": "0.2.0",
+  "displayName": "Notes Search",
+  "description": "Search, read and talk about your markdown notes, indexed on your computer by QMD. Works with Obsidian vaults, Reflect graphs and any folder of .md files. Matching passages appear as you type, notes open in a reader with wikilinks, embeds, an outline and backlinks, and you can start a chat about one note or several at once.",
+  "author": "Kyle Seaman",
+  "license": "MIT",
+  "tags": [
+    "qmd",
+    "search",
+    "markdown",
+    "notes",
+    "obsidian",
+    "reader",
+    "knowledge"
+  ],
+  "highlights": [
+    "Search as you type with passage snippets from QMD's keyword index, plus search by meaning on demand",
+    "A reader for notes: [[wikilinks]], backlinks, an outline, embedded images and in-note match highlighting",
+    "Obsidian vaults: filename and alias links, callouts, highlights, ![[embeds]], sized images and Open in Obsidian",
+    "Add, re-index and remove folders in the app, with suggestions for Obsidian vaults on this computer",
+    "Chat about one note or several, and private notes are never sent to an agent"
+  ],
+  "useCases": [
+    "Find the note where a decision was made, read it, and ask what is still open about it.",
+    "Pull three meeting summaries into one conversation and ask where they disagree."
+  ],
+  "configuration": [
+    "Needs the qmd CLI (npm install -g @tobilu/qmd). Add folders from the Folders screen. Reads QMD's index at ~/.cache/qmd/index.sqlite read-only (override with QMD_INDEX). Finds qmd at ~/.local/bin/qmd, ~/.bun/bin/qmd or on PATH (override with QMD_BIN)."
+  ],
+  "defaultEnabled": false,
+  "skills": [
+    "skills/notes-search",
+    "skills/notes-search-setup"
+  ],
+  "iconPath": "assets/icon.svg",
+  "iconPathDark": "assets/icon-dark.svg",
+  "ui": {
+    "entry": "dist/index.mjs",
+    "pages": [
+      {
+        "route": "/apps/notes-search",
+        "label": "Notes Search",
+        "icon": "LibraryBig"
+      }
+    ]
+  },
+  "backend": {
+    "hooks": {
+      "routes": "backend.routes:register_routes"
+    }
+  },
+  "permissions": {
+    "api": [
+      "/api/apps/notes-search",
+      "/api/apps/notes-search/*",
+      "/api/chat",
+      "/api/chat/*"
+    ],
+    "events": [],
+    "mcpTools": [],
+    "storage": true,
+    "cron": false,
+    "network": false,
+    "spawn": false,
+    "memory": ""
+  },
+  "dependencies": {
+    "commands": [
+      "python3"
+    ],
+    "optionalCommands": [
+      "qmd"
+    ]
+  },
+  "platform": {
+    "os": [
+      "macos",
+      "linux"
+    ]
+  }
+}
