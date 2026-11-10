@@ -134,7 +134,6 @@ export const LIBRARY_CSS = `
   min-height: 0;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--divider-soft);
   background: var(--bg);
   overflow: hidden;
 }
@@ -444,6 +443,8 @@ export const LIBRARY_CSS = `
 .lib-btn-quiet { color: var(--muted); padding: 6px 9px; }
 .lib-btn-quiet:hover:not(:disabled) { background: var(--hover); color: var(--text); }
 .lib-btn-quiet[aria-pressed="true"] { color: var(--accent-text); background: var(--hover); }
+.lib-tabs > .lib-btn-icon[aria-pressed] { background: transparent; color: var(--muted); }
+.lib-tabs > .lib-btn-icon[aria-pressed]:hover { background: var(--hover); color: var(--text); }
 .lib-btn-sm { padding: 4px 10px; font-size: 12px; }
 .lib-btn-icon { padding: 7px; border-radius: 999px; }
 .lib-tray .lib-btn-primary { background: var(--accent); color: var(--accent-fg); }
@@ -508,16 +509,22 @@ export const LIBRARY_CSS = `
   min-height: 0;
   display: flex;
   flex-direction: column;
-  background: var(--raised);
+  background: var(--bg);
   position: relative;
 }
+.lib-center > .lib-scroll {
+  background: var(--card);
+  border-radius: var(--r-md);
+  margin: 0 10px 10px 0;
+  box-shadow: var(--shadow-sm);
+}
+.lib-frame[data-left="closed"] .lib-center > .lib-scroll { margin-left: 10px; }
 .lib-tabs {
   display: flex;
   align-items: flex-end;
   gap: 2px;
   padding: 10px 10px 0;
   background: var(--bg);
-  border-bottom: 1px solid var(--divider-soft);
   overflow-x: auto;
   scrollbar-width: none;
   min-height: 48px;
@@ -927,7 +934,6 @@ export const LIBRARY_CSS = `
   min-height: 0;
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--divider-soft);
   background: var(--bg);
   overflow: hidden;
 }
