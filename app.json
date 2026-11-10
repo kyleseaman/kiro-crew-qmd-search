@@ -1,6 +1,6 @@
 {
   "name": "notes-search",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "displayName": "Notes Search",
   "description": "Search, read and talk about your markdown notes, indexed on your computer by QMD. Works with Obsidian vaults, Reflect graphs and any folder of .md files. Matching passages appear as you type, notes open in a reader with wikilinks, embeds, an outline and backlinks, and you can start a chat about one note or several at once.",
   "author": "Kyle Seaman",
