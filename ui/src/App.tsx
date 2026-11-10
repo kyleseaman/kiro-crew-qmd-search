@@ -446,8 +446,6 @@ function Welcome(p: {
   onOpen: (h: Hit) => void
   onFoldersChanged: () => void
 }) {
-  const hour = new Date().getHours()
-  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
   // No index yet, or an index with nothing in it: setup is the only useful thing here.
   if (p.status && (p.status.collections.length === 0 || /index not found/i.test(p.status.error ?? ''))) {
     return (
@@ -464,24 +462,14 @@ function Welcome(p: {
       </div>
     )
   }
+  // Nothing open: a quiet placeholder. The search panel on the left is the
+  // starting point, so this side doesn't repeat it.
   return (
     <div className="lib-scroll">
-      <div className="lib-welcome lib-welcome-quiet">
-        <div className="lib-meta-sm">{greeting}</div>
-        <h2>Search your notes</h2>
-        <p>
-          Matching passages appear as you type. Open a note to read it, then chat about it, or select a few results and talk about them together.
-        </p>
-        <div className="lib-row" style={{ gap: 8 }}>
-          <button type="button" className="lib-btn lib-btn-primary" onClick={p.onSearch}>
-            <I.Search size={15} /> Start searching
-          </button>
-          {p.recent[0] && (
-            <button type="button" className="lib-btn lib-btn-secondary lib-ell" style={{ maxWidth: 320 }} onClick={() => p.onOpen(p.recent[0])}>
-              <I.Clock size={15} /> <span className="lib-ell">Continue “{p.recent[0].title}”</span>
-            </button>
-          )}
-        </div>
+      <div className="lib-empty-reader">
+        <I.File size={30} strokeWidth={1.6} aria-hidden="true" />
+        <b>No note open</b>
+        <p>Pick a note on the left, or search to find one. You can chat about any note you open.</p>
         <div className="lib-keyline" aria-label="Keyboard shortcuts">
           <span><span className="lib-kbd">/</span> search</span>
           <span><span className="lib-kbd">{MOD}↵</span> search by meaning</span>
@@ -489,7 +477,7 @@ function Welcome(p: {
           <span><span className="lib-kbd">{MOD}J</span> chats</span>
         </div>
         {p.sessions.length > 0 && (
-          <div style={{ marginTop: 12 }}>
+          <div className="lib-empty-chats">
             <div className="lib-section" style={{ paddingLeft: 0 }}>Recent chats</div>
             {p.sessions.slice(0, 5).map((s) => (
               <button key={s.slot_key} type="button" className="lib-convo" onClick={() => p.onResume(s)}>
