@@ -351,6 +351,7 @@ export default function QmdLibrary() {
             indexInfo={indexInfo}
             sort={sort}
             onSort={setSort}
+            onCollapse={() => setLeftOpen(false)}
           />
         ) : (
           <div />
