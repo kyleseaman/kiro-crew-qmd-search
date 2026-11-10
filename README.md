@@ -28,6 +28,14 @@ Notes Search uses your Crew theme and follows your light or dark mode.
 
 ## Install
 
+**From the App Store (recommended).** This repo works as its own app registry, so Crew can install it and pick up updates:
+
+1. In Kiro Crew, open **App Store**, then **Sources** (the gear in the Discover header).
+2. Under **External Registries**, add a registry with repo `https://github.com/kyleseaman/kiro-crew-qmd-search` and branch `main`.
+3. Find **Notes Search** in Discover, then click **Install** and **Enable**.
+
+**From a clone.**
+
 ```sh
 git clone https://github.com/kyleseaman/kiro-crew-qmd-search.git
 kirocrew app install ./kiro-crew-qmd-search
